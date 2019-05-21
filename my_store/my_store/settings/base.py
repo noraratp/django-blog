@@ -35,7 +35,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    'blog.apps.BlogConfig',
+    'blog',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -68,7 +68,7 @@ TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [  
-            os.path.join(BASE_DIR, 'templates'),
+            os.path.join(BASE_DIR, 'templates/dashboard'),
             OSCAR_MAIN_TEMPLATE_DIR],
         'APP_DIRS': True,
         'OPTIONS': {
@@ -154,3 +154,18 @@ HAYSTACK_CONNECTIONS = {
         'ENGINE': 'haystack.backends.simple_backend.SimpleEngine',
     },
 }
+
+
+OSCAR_DASHBOARD_NAVIGATION += [
+    {
+        'label': ('Blog'),
+        'icon': 'icon-sitemap',
+        'url_name': 'blog:blog_list_view',
+        # 'children': [
+        #     {
+        #         'label': _('Products'),
+        #         'url_name': 'dashboard:catalogue-product-list',
+        #     },            
+        # ]
+    },
+]

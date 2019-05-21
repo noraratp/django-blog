@@ -1,0 +1,18 @@
+{% extends 'oscar/dashboard/layout.html' %}
+{% load i18n %}
+{% load staticfiles %}
+{% load sorting_tags %}
+{% load render_table from django_tables2 %}
+{% block body_class %}{{ block.super }} blog{% endblock %}
+
+{% block title %}
+    {% trans "Blog" %} | {{ block.super }}
+{% endblock %}
+{% block breadcrumbs %}
+    <ul class="breadcrumb">
+        <li>
+            <a href="{% url 'dashboard:index' %}">{% trans "Dashboard" %}</a>
+        </li>
+        <li class="active">{% trans "Blog" %}</li>
+    </ul>
+{% endblock %}
