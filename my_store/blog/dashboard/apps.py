@@ -18,6 +18,7 @@ class BlogApplication(Application):
     def get_urls(self):
         urls = [
             url(r'^blog_list_view/$', self.blog_list_view.as_view(), name='blog_list_view')
+            # url(r'^blog_list_view/$', self.blog_list_view.as_view(), name='blog_list_view')
         ]
         return self.post_process_urls(urls)
 

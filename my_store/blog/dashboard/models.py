@@ -4,7 +4,7 @@ from django.conf import settings
 
 class Category(models.Model):
     name = models.CharField(max_length=200)
-    
+
     def __str__(self):
         return self.name
 
@@ -18,7 +18,12 @@ class Post(models.Model):
     author = models.CharField(max_length=200)
     category = models.ManyToManyField(Category)
     excerpt = models.CharField(max_length=200)
-    
+
     def __str__(self):
         return self.title
-    
+
+
+# class ProductFilter(django_filters.FilterSet):
+#     class Meta:
+#         model = Post
+#         fields = ['author', 'title']
