@@ -1,9 +1,11 @@
-import django_tables2 as tables
 from .models import Post
-# from django_tables2 import A, Column, TemplateColumn
+import django_tables2 as tables
 
 
 class PostTable(tables.Table):
+
+    author = tables.TemplateColumn('{{ record.author.email | default:"-" }}')
+
     class Meta:
         model = Post
         template_name = 'django_tables2/bootstrap.html'
