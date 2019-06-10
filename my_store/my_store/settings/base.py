@@ -57,7 +57,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    
+
     'oscar.apps.basket.middleware.BasketMiddleware',
     'django.contrib.flatpages.middleware.FlatpageFallbackMiddleware',
 ]
@@ -67,7 +67,7 @@ ROOT_URLCONF = 'my_store.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [  
+        'DIRS': [
             os.path.join(BASE_DIR, 'templates/dashboard'),
             OSCAR_MAIN_TEMPLATE_DIR],
         'APP_DIRS': True,
@@ -77,7 +77,6 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
-                
                 'oscar.apps.search.context_processors.search_form',
                 'oscar.apps.promotions.context_processors.promotions',
                 'oscar.apps.checkout.context_processors.checkout',
@@ -160,12 +159,6 @@ OSCAR_DASHBOARD_NAVIGATION += [
     {
         'label': ('Blog'),
         'icon': 'icon-sitemap',
-        'url_name': 'blog:blog_list_view',
-        # 'children': [
-        #     {
-        #         'label': _('Products'),
-        #         'url_name': 'dashboard:catalogue-product-list',
-        #     },            
-        # ]
+        'url_name': 'blog:blog_list_view'        
     },
 ]
