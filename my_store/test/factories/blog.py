@@ -3,9 +3,9 @@ from datetime import datetime
 
 from django.utils import timezone
 
-from blog.dashboard.models import Post, PostCategory
-from .user import UserFactory
 from .category import CategoryFactory
+from .user import UserFactory
+from blog.dashboard.models import Post, PostCategory
 
 
 class PostFactory(factory.DjangoModelFactory):

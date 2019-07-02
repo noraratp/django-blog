@@ -17,6 +17,7 @@ from django.contrib import admin
 from django.urls import path
 from django.conf.urls import include, url
 from oscar.app import application
+
 from blog.dashboard.apps import application as blog_app
 
 urlpatterns = [
