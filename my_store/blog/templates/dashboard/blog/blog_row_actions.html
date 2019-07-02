@@ -1,0 +1,21 @@
+{% load django_tables2 %}
+{% load i18n %}
+<div class="btn-toolbar">
+    <div class="btn-group">
+        <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="true">
+            {% trans "Actions" %}
+            <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu pull-right">
+            <li>
+                {% comment %} <a href="{% url 'dashboard:blog_detail_view' pk=record.id %}{% querystring %}">{% trans "Edit" %}</a> {% endcomment %}
+            </li>
+            <li>
+                <a href="{{ record.get_absolute_url }}"> {% trans "View on site" %}</a>
+            </li>
+            {% comment %} <li>
+                <a href="{% url 'dashboard:blog_detail_view-delete' pk=record.id %}">{% trans "Delete" %}</a>
+            </li> {% endcomment %}
+        </ul>
+    </div>
+</div>
