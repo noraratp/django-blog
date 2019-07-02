@@ -1,7 +1,8 @@
+from django_tables2 import SingleTableView
+
 from .models import Post
 from .tables import PostTable
 from .forms import PostSearchForm
-from django_tables2 import SingleTableView
 
 
 class BlogListView(SingleTableView):

@@ -1,9 +1,10 @@
 from datetime import timedelta
-from django.utils import timezone
 
+from django.contrib.auth.models import User
 from django.test import TestCase, Client
 from django.urls import reverse
-from django.contrib.auth.models import User
+from django.utils import timezone
+
 
 from test.factories import PostFactory
 
