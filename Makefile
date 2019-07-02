@@ -1,12 +1,34 @@
-.PHONY: start stop bash down
+.PHONY: start stop bash restart
+
+# Project variables
+PROJECT_NAME ?= blog
+
+# Filenames
+DEV_COMPOSE_FILE := docker/dev/docker-compose.yml
+
 start:
-	docker-compose -f docker/dev/docker-compose.yml up
+	$(INFO) "Start local..."
+	@ docker-compose -p $(PROJECT_NAME) -f $(DEV_COMPOSE_FILE) up web
 
 stop:
-	docker-compose -f docker/dev/docker-compose.yml stop
+	$(INFO) "Stop local..."
+	@ docker-compose -p $(PROJECT_NAME) -f $(DEV_COMPOSE_FILE) stop web
 
-down:
-	docker-compose -f docker/dev/docker-compose.yml down
+restart:
+	${INFO} "Restart..."
+	@ docker-compose -p $(PROJECT_NAME) -f $(DEV_COMPOSE_FILE) restart web
 
 bash:
-	docker exec -it dev_web_1 bash
+	${INFO} "connecting to container..."
+	@ docker exec -it blog_web_1 /bin/bash
+
+
+# Cosmetics
+YELLOW := "\e[1;33m"
+NC := "\e[0m"
+
+# Shell Functions
+INFO := @bash -c '\
+  printf $(YELLOW); \
+  echo "=> $$1"; \
+  printf $(NC)' SOME_VALUE
