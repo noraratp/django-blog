@@ -1,5 +1,6 @@
-from .models import Post
 import django_tables2 as tables
+
+from .models import Post
 
 
 class PostTable(tables.Table):

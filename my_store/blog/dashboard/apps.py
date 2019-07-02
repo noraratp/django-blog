@@ -1,6 +1,8 @@
 from oscar.core.application import Application
-from .views import BlogListView, BlogDetailView, BlogCreateView
+
 from django.conf.urls import url
+
+from .views import BlogListView, BlogDetailView, BlogCreateView
 
 
 class BlogApplication(Application):

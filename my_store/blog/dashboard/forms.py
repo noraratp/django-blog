@@ -1,6 +1,6 @@
-from django import forms
-
 from oscar.forms.widgets import DateTimePickerInput
+
+from django import forms
 
 from .models import Post, PostCategory, Category
 

@@ -1,4 +1,5 @@
 from django.contrib import admin
+
 from .dashboard.models import Post, Category, PostCategory
 
 # Register your models here.
