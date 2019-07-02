@@ -2,6 +2,8 @@ from oscar.defaults import *
 from oscar import OSCAR_MAIN_TEMPLATE_DIR
 from oscar import get_core_apps
 
+from blog import OSCAR_BLOG_TEMPLATE_DIR
+
 """
 Django settings for my_store project.
 
@@ -68,8 +70,10 @@ TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [
-            os.path.join(BASE_DIR, 'templates/dashboard'),
-            OSCAR_MAIN_TEMPLATE_DIR],
+            os.path.join(BASE_DIR, 'templates'),
+            OSCAR_BLOG_TEMPLATE_DIR,
+            OSCAR_MAIN_TEMPLATE_DIR
+        ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
