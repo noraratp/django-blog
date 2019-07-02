@@ -5,6 +5,8 @@ from django.test import TestCase, Client
 from django.urls import reverse
 from django.contrib.auth.models import User
 
+from blog.dashboard.models import Post
+from blog.dashboard.forms import PostForm
 from test.factories import PostFactory
 
 
@@ -83,3 +85,12 @@ class TestBlogListView(WebTestCase):
         ]
         self.assertQuerysetEqual(
             response.context['post_table'].data.data, expected_data)
+
+
+class TestBlogCreateView(WebTestCase):
+    def setUp(self):
+        self.form = PostForm
+
+    def test_form_model_should_equal_Post(self):
+        self.assertEquals(self.form.Meta.model, Post)
+
