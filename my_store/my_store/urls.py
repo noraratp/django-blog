@@ -18,12 +18,14 @@ from django.urls import path
 from django.conf.urls import include, url
 from oscar.app import application
 
+from blog.dashboard.apps import application as blog_app
+
 urlpatterns = [
     url(r'^i18n/', include('django.conf.urls.i18n')),
 
     # The Django admin is not officially supported; expect breakage.
     # Nonetheless, it's often useful for debugging.
     url(r'^admin/', admin.site.urls),
-
+    url(r'^blog/', blog_app.urls),
     url(r'', application.urls),
 ]

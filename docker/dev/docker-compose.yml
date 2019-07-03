@@ -14,7 +14,7 @@ services:
       dockerfile: docker/dev/Dockerfile
     volumes:
       - ../../my_store:/code
-      - appenv:/oscar
+      - appenv:/venv
     env_file: ./conf.env
     command: python3 manage.py runserver 0.0.0.0:8000
     ports:
