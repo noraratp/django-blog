@@ -37,7 +37,8 @@ class BlogListView(SingleTableView):
 
         data = self.form.cleaned_data
         if data.get('author'):
-            queryset = Post.objects.filter(author__email__icontains=data['author'])
+            queryset = Post.objects.filter(
+                author__email__icontains=data['author'])
 
         if data.get('title'):
             queryset = queryset.filter(title__icontains=data['title'])
@@ -54,13 +55,16 @@ class BlogCreateView(generic.CreateView):
 
     def get_context_data(self, **kwargs):
         ctx = super().get_context_data(**kwargs)
-        ctx['category_formset'] = self.category_formset_class(instance=self.object)
+        ctx['category_formset'] = self.category_formset_class(
+            instance=self.object)
         return ctx
 
     def process_all_forms(self, form):
+        print(self.request.POST)
         if form.is_valid():
             self.object = form.save(commit=False)
-        formset = self.category_formset_class(self.request.POST, instance=self.object)
+        formset = self.category_formset_class(
+            self.request.POST, instance=self.object)
         is_valid = form.is_valid() and formset.is_valid()
         if is_valid:
             return self.forms_valid(form, formset)
@@ -87,13 +91,12 @@ class BlogCreateView(generic.CreateView):
 
         action = self.request.POST.get('action')
         if action == 'continue':
-            # return reverse('blog-dashboard:blog-post-detail-update', kwargs={'id': self.object.id})
-            return reverse('blog:blog_list_view')
+            return reverse('blog:blog_detail_view', kwargs={'id': self.object.id})
         else:
             return reverse('blog:blog_list_view')
 
 
-class BlogDetailView(generic.DetailView):
+class BlogDetailView(generic.UpdateView):
     template_name = 'dashboard/blog/detail.html'
     form_class = PostForm
     context_object_name = 'post_detail'
@@ -101,9 +104,49 @@ class BlogDetailView(generic.DetailView):
 
     def get_context_data(self, **kwargs):
         ctx = super().get_context_data(**kwargs)
-        ctx['form'] = self.form_class()
-        ctx['category_formset'] = self.category_formset_class(instance=self.object)
+        ctx['form'] = self.form_class(instance=self.object)
+        ctx['category_formset'] = self.category_formset_class(
+            instance=self.object)
         return ctx
 
     def get_object(self, queryset=None):
         return get_object_or_404(Post, pk=self.kwargs['id'])
+
+    def process_all_forms(self, form):
+        formset = self.category_formset_class(
+            self.request.POST, instance=self.object)
+        is_valid = form.is_valid() and formset.is_valid()
+        if is_valid:
+            return self.forms_valid(form, formset)
+        else:
+            return self.forms_invalid(form, formset)
+
+    form_valid = form_invalid = process_all_forms
+
+    def forms_valid(self, form, formset):
+        self.object = form.save()
+        formset.save()
+        return HttpResponseRedirect(self.get_success_url())
+
+    def forms_invalid(self, form, formset):
+        messages.error(self.request,
+                       ("Your submitted data was not valid - please "
+                        "correct the errors below"))
+        context = self.get_context_data(form=form)
+        context['category_formset'] = formset
+        return self.render_to_response(context)
+
+    def get_success_url(self):
+
+        action = self.request.POST.get('action')
+        if action == 'continue':
+            messages.success(self.request, ('save success'))
+            url = reverse(
+                'blog:blog_detail_view', kwargs={"id": self.object.id})
+        elif action == 'save':
+            messages.success(self.request, ('save success'))
+            url = reverse('blog:blog_list_view')
+        else:
+            url = reverse('blog:blog_detail_view', kwargs={
+                          'slug': self.object.slug})
+        return url

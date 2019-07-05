@@ -1,2 +1,2 @@
 {% load django_tables2 %}
-<a href="{% url 'blog:blog_detail_view' pk=record.pk %}{% querystring %}">{{ value }}</a>
+<a href="{% url 'blog:blog_detail_view' id=record.pk %}{% querystring %}">{{ value }}</a>

@@ -22,11 +22,9 @@ class BlogApplication(Application):
             url(r'^blog_list_view/post/create/$',
                 self.blog_create_view.as_view(),
                 name='blog_create_view'),
-            url(r'^blog_list_view/(?P<pk>\d+)/$',
+            url(r'^blog_list_view/(?P<id>\d+)/$',
                 self.blog_detail_view.as_view(),
                 name='blog_detail_view'),
-            
-            
         ]
         return self.post_process_urls(urls)
 
