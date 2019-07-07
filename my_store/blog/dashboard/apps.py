@@ -2,7 +2,7 @@ from oscar.core.application import Application
 
 from django.conf.urls import url
 
-from .views import BlogListView, BlogDetailView, BlogCreateView
+from .views import BlogListView, BlogDetailView, BlogCreateView, BlogDeleteView
 
 
 class BlogApplication(Application):
@@ -14,6 +14,7 @@ class BlogApplication(Application):
     blog_list_view = BlogListView
     blog_detail_view = BlogDetailView
     blog_create_view = BlogCreateView
+    blog_delete_view = BlogDeleteView
 
     def get_urls(self):
         urls = [
@@ -25,6 +26,9 @@ class BlogApplication(Application):
             url(r'^blog_list_view/(?P<id>\d+)/$',
                 self.blog_detail_view.as_view(),
                 name='blog_detail_view'),
+            url(r'^delete/(?P<pk>\d+)/$',
+                self.blog_delete_view.as_view(),
+                name='blog_detail_delete_view'),
         ]
         return self.post_process_urls(urls)
 
