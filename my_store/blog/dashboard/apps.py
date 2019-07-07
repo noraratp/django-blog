@@ -4,7 +4,6 @@ from django.conf.urls import url
 
 from .views import BlogListView, BlogDetailView, BlogCreateView, BlogDeleteView
 
-
 class BlogApplication(Application):
     name = 'blog'
     label = 'blog_list'

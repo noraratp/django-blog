@@ -1,6 +1,6 @@
-from oscar.defaults import *
 from oscar import OSCAR_MAIN_TEMPLATE_DIR
 from oscar import get_core_apps
+from oscar.defaults import *
 
 from blog import OSCAR_BLOG_TEMPLATE_DIR
 
