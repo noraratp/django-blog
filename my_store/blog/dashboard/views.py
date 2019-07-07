@@ -60,12 +60,12 @@ class BlogCreateView(generic.CreateView):
         return ctx
 
     def process_all_forms(self, form):
-        print(self.request.POST)
         if form.is_valid():
             self.object = form.save(commit=False)
         formset = self.category_formset_class(
             self.request.POST, instance=self.object)
         is_valid = form.is_valid() and formset.is_valid()
+        print(form.errors)
         if is_valid:
             return self.forms_valid(form, formset)
         else:
@@ -75,6 +75,7 @@ class BlogCreateView(generic.CreateView):
 
     def forms_valid(self, form, formset):
         self.object = form.save()
+
         formset.save()
         return HttpResponseRedirect(self.get_success_url())
 
@@ -147,6 +148,16 @@ class BlogDetailView(generic.UpdateView):
             messages.success(self.request, ('save success'))
             url = reverse('blog:blog_list_view')
         else:
-            url = reverse('blog:blog_detail_view', kwargs={
-                          'slug': self.object.slug})
+            url = reverse('blog:blog_detail_view',
+                          kwargs={"id": self.object.id})
         return url
+
+
+class BlogDeleteView(generic.DeleteView):
+    template_name = 'dashboard/blog/delete.html'
+    model = Post
+    context_object_name = 'posts'
+
+    def get_success_url(self):
+        messages.success(self.request, ('Post deleted successfully'))
+        return reverse('blog:blog_list_view')
