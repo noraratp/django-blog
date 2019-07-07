@@ -13,9 +13,11 @@
             <li>
                 <a href="{{ record.get_absolute_url }}"> {% trans "View on site" %}</a>
             </li>
-            {% comment %} <li>
-                <a href="{% url 'dashboard:blog_detail_view-delete' pk=record.id %}">{% trans "Delete" %}</a>
-            </li> {% endcomment %}
+            <li>
+            {% comment %} <a href="{% url 'blog:blog_detail_delete_view' pk=record.id %}">{% trans "Delete" %}</a> {% endcomment %}
+            {% comment %} <a href="{% url 'blog:blog_detail_delete_view' id=record.pk %}{% querystring %}">{% trans "Delete" %}</a> {% endcomment %}
+            <a href="{% url 'blog:blog_detail_delete_view' pk=record.id %}">{% trans "Delete" %}</a>
+            </li>
         </ul>
     </div>
 </div>
