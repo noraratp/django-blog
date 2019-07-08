@@ -15,7 +15,7 @@ class Post(models.Model):
     title = models.CharField(max_length=200)
     content = models.TextField(blank=True)
     featured_image = models.ImageField(
-        ("Featured Image"), upload_to=settings.OSCAR_IMAGE_FOLDER, max_length=255)
+        ("Featured Image"), upload_to=settings.OSCAR_IMAGE_FOLDER, max_length=255, blank=True)
     post_date = models.DateTimeField('date published')
     author = models.ForeignKey(
         AUTH_USER_MODEL,
