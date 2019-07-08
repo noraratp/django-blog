@@ -163,6 +163,6 @@ OSCAR_DASHBOARD_NAVIGATION += [
     {
         'label': ('Blog'),
         'icon': 'icon-sitemap',
-        'url_name': 'blog:blog_list_view'        
+        'url_name': 'blog:blog-list-view'
     },
 ]

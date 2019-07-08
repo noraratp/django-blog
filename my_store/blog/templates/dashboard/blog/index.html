@@ -18,8 +18,15 @@
 {% endblock %}
 
 {% block header %}
-    <div class="page-header action">
-        <h1>{% trans "Blog" %}</h1>
+    <div class="page-header">
+          <form action="{% url 'blog:blog-create-view' %}" method="get" class="form-inline">
+            <div>
+            <h1>{% trans "Blog" %}</h1>
+            </div>
+            <div style="text-align:right">
+                <button class="btn btn-primary" type="submit" data-loading-text="{% trans 'Submitting...' %}"><i class="icon-plus"></i> {% trans "New Post" %}</button>
+            </div>
+        </form>
     </div>
 {% endblock header %}
 

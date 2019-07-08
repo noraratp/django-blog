@@ -1,4 +1,8 @@
+from oscar.forms.widgets import DateTimePickerInput
+
 from django import forms
+
+from .models import Post, PostCategory, Category
 
 
 class PostSearchForm(forms.Form):
@@ -12,3 +16,34 @@ class PostSearchForm(forms.Form):
         cleaned_data['author'] = cleaned_data['author'].strip()
 
         return cleaned_data
+
+
+class PostForm(forms.ModelForm):
+
+    post_date = forms.DateTimeField(widget=DateTimePickerInput())
+
+    class Meta:
+        model = Post
+        fields = ('id', 'title', 'content', 'featured_image',
+                  'author', 'excerpt', 'post_date')
+
+
+class CategoryGroupForm(forms.ModelForm):
+
+    class Meta:
+        model = PostCategory
+        fields = ['category', 'post']
+
+
+class CategoryForm(forms.ModelForm):
+
+    class Meta:
+        model = Category
+        fields = ['name']
+
+
+class CategorySearchForm(forms.Form):
+    name = forms.CharField(required=False, label=("Name"))
+
+    class Meta:
+        fields = ['name']
