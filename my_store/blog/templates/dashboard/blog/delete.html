@@ -9,7 +9,7 @@
             <a href="{% url 'dashboard:index' %}">{% trans "Dashboard" %}</a>
         </li>
         <li>
-        <a href="{% url 'blog:blog_list_view' %}">{% trans "Post" %}</a>
+        <a href="{% url 'blog:blog-list-view' %}">{% trans "Post" %}</a>
     </li>
     <li class="active">{% trans "Delete post?" %}</li>
 </ul>
@@ -31,7 +31,7 @@
         </p>
         <div class="form-actions">
             <button type="submit" class="btn btn-danger" data-loading-text="{% trans 'Deleting...' %}">{% trans "Delete" %}</button>
-        {% trans "or" %} <a href="{% url 'blog:blog_list_view' %}">{% trans "cancel" %}</a>
+        {% trans "or" %} <a href="{% url 'blog:blog-list-view' %}">{% trans "cancel" %}</a>
         </div>
     </form>
 {% endblock %}

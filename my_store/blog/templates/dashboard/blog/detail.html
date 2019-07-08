@@ -13,7 +13,7 @@
         <li>
             <a href="{% url 'dashboard:index' %}">{% trans "Dashboard" %}</a>
         </li>
-        <li class=""> <a href="{% url 'blog:blog_list_view' %}">{% trans "Blog" %}</a></li>
+        <li class=""> <a href="{% url 'blog:blog-list-view' %}">{% trans "Blog" %}</a></li>
         <li class="active">{% trans "Update Post" %}</li>
     </ul>
 {% endblock %}
@@ -25,8 +25,6 @@
 {% endblock header %}
 
 {% block dashboard_content %}
-{% comment %} {% render_table post_table %}
-    {{ block.super }} {% endcomment %}
 <form action="{% if request.GET.urlencode %}?{{ request.GET.urlencode }}{% endif %}" method="post" class="form-stacked wysiwyg fixed-actions" enctype="multipart/form-data" data-behaviour="affix-nav-errors" autocomplete="off">
         {% csrf_token %}
 
@@ -98,7 +96,7 @@
             <div class="fixed-actions-group">
                 <div class="form-group">
                     <div class="pull-right">
-                        <a href="{% url 'blog:blog_list_view' %}">
+                        <a href="{% url 'blog:blog-list-view' %}">
                             {% trans "Cancel" %}
                         </a>
                         {% trans "or" %}
@@ -115,7 +113,7 @@
                         </button>
                     </div>
                     {% if product %}
-                        <a class="btn btn-success btn-lg" href="{{ product.get_absolute_url }}">{% trans "View on site" %}</a>
+                        <a class="btn btn-success btn-lg" href="{{ post_detail.get_absolute_url }}">{% trans "View on site" %}</a>
                     {% endif %}
                 </div>
             </div>

@@ -29,7 +29,7 @@ class WebTestCase(TestCase):
 
 class TestBlogListView(WebTestCase):
     def setUp(self):
-        self.url = reverse('blog:blog_list_view')
+        self.url = reverse('blog:blog-list-view')
         self.post_1 = PostFactory(
             title='xxxxxxxxx', post_date=timezone.now()+timedelta(days=30))
         self.post_2 = PostFactory(

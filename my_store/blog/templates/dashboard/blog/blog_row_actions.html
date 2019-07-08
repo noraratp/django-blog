@@ -8,15 +8,10 @@
         </button>
         <ul class="dropdown-menu pull-right">
             <li>
-                {% comment %} <a href="{% url 'dashboard:blog_detail_view' pk=record.id %}{% querystring %}">{% trans "Edit" %}</a> {% endcomment %}
-            </li>
-            <li>
                 <a href="{{ record.get_absolute_url }}"> {% trans "View on site" %}</a>
             </li>
             <li>
-            {% comment %} <a href="{% url 'blog:blog_detail_delete_view' pk=record.id %}">{% trans "Delete" %}</a> {% endcomment %}
-            {% comment %} <a href="{% url 'blog:blog_detail_delete_view' id=record.pk %}{% querystring %}">{% trans "Delete" %}</a> {% endcomment %}
-            <a href="{% url 'blog:blog_detail_delete_view' pk=record.id %}">{% trans "Delete" %}</a>
+            <a href="{% url 'blog:blog-detail-delete-view' pk=record.id %}">{% trans "Delete" %}</a>
             </li>
         </ul>
     </div>

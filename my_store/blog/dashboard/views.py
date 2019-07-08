@@ -92,9 +92,9 @@ class BlogCreateView(generic.CreateView):
 
         action = self.request.POST.get('action')
         if action == 'continue':
-            return reverse('blog:blog_detail_view', kwargs={'id': self.object.id})
+            return reverse('blog:blog-detail-view', kwargs={'id': self.object.id})
         else:
-            return reverse('blog:blog_list_view')
+            return reverse('blog:blog-list-view')
 
 
 class BlogDetailView(generic.UpdateView):
@@ -143,12 +143,12 @@ class BlogDetailView(generic.UpdateView):
         if action == 'continue':
             messages.success(self.request, ('save success'))
             url = reverse(
-                'blog:blog_detail_view', kwargs={"id": self.object.id})
+                'blog:blog-detail-view', kwargs={"id": self.object.id})
         elif action == 'save':
             messages.success(self.request, ('save success'))
-            url = reverse('blog:blog_list_view')
+            url = reverse('blog:blog-list-view')
         else:
-            url = reverse('blog:blog_detail_view',
+            url = reverse('blog:blog-detail-view',
                           kwargs={"id": self.object.id})
         return url
 
@@ -160,4 +160,4 @@ class BlogDeleteView(generic.DeleteView):
 
     def get_success_url(self):
         messages.success(self.request, ('Post deleted successfully'))
-        return reverse('blog:blog_list_view')
+        return reverse('blog:blog-list-view')
