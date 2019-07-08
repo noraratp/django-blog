@@ -60,12 +60,15 @@ class BlogCreateView(generic.CreateView):
         return ctx
 
     def process_all_forms(self, form):
-        if form.is_valid():
-            self.object = form.save(commit=False)
+
+        if not form.is_valid():
+            return self.forms_invalid(form, None)
+
+        self.object = form.save(commit=False)
         formset = self.category_formset_class(
             self.request.POST, instance=self.object)
+
         is_valid = form.is_valid() and formset.is_valid()
-        print(form.errors)
         if is_valid:
             return self.forms_valid(form, formset)
         else:
@@ -105,7 +108,6 @@ class BlogDetailView(generic.UpdateView):
 
     def get_context_data(self, **kwargs):
         ctx = super().get_context_data(**kwargs)
-        ctx['form'] = self.form_class(instance=self.object)
         ctx['category_formset'] = self.category_formset_class(
             instance=self.object)
         return ctx
