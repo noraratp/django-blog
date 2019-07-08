@@ -1,4 +1,6 @@
 import django_tables2 as tables
+from django_tables2.utils import A  # alias for Accessor
+
 
 from .models import Post
 
@@ -7,10 +9,7 @@ class PostTable(tables.Table):
 
     author = tables.TemplateColumn('{{ record.author.email | default:"-" }}')
 
-    title = tables.TemplateColumn(
-        verbose_name=('Title'),
-        template_name='dashboard/blog/blog_row_title.html',
-        order_by='title', accessor=('title'))
+    title = tables.LinkColumn('blog:blog-detail-view', args=[A('pk')])
 
     actions = tables.TemplateColumn(
         verbose_name=('Actions'),
