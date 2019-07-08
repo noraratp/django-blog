@@ -89,7 +89,7 @@ class TestBlogListView(WebTestCase):
 
 class TestBlogCreateView(WebTestCase):
     def setUp(self):
-        self.url = reverse('blog:blog_create_view')
+        self.url = reverse('blog:blog-create-view')
         self.category_factory = CategoryFactory()
         self.util = Util()
 
@@ -125,7 +125,7 @@ class TestBlogCreateView(WebTestCase):
 
         response = self.client.post(
             self.url, data=data)
-        self.assertEqual(response.status_code, 302)
+        self.assertRedirects(response, reverse('blog:blog-list-view'))
 
         expect_post = Post.objects.get(title=data['title'])
         self.assertEqual(expect_post.content, data['content'])
@@ -143,7 +143,7 @@ class TestlUpdateView(WebTestCase):
         self.post_factory = PostFactory()
         self.category_factory = CategoryFactory()
         self.url_post_detail_view = reverse(
-            'blog:blog_detail_view',
+            'blog:blog-detail-view',
             kwargs={'id': self.post_factory.id}
         )
         self.util = Util()
@@ -174,8 +174,9 @@ class TestlUpdateView(WebTestCase):
             'postcategory_set-0-category': self.category_factory.id
         }
 
-        response = self.client.post(self.url_post_detail_view, data=data)
-        self.assertEqual(response.status_code, 302)
+        response = self.client.post(
+            self.url_post_detail_view, data=data)
+        self.assertRedirects(response, self.url_post_detail_view)
 
         expect_data = Post.objects.get(id=self.post_factory.id)
         self.assertEqual(expect_data.content, data['content'])
