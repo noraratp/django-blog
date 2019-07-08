@@ -24,7 +24,8 @@ class PostForm(forms.ModelForm):
 
     class Meta:
         model = Post
-        fields = ('id', 'title', 'content', 'featured_image', 'author', 'excerpt', 'post_date')
+        fields = ('id', 'title', 'content', 'featured_image',
+                  'author', 'excerpt', 'post_date')
 
 
 class CategoryGroupForm(forms.ModelForm):
@@ -46,8 +47,3 @@ class CategorySearchForm(forms.Form):
 
     class Meta:
         fields = ['name']
-
-    def clean(self):
-        cleaned_data = super(CategorySearchForm, self).clean()
-        cleaned_data['name'] = cleaned_data['name']
-        return cleaned_data
